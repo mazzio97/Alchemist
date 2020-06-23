@@ -16,6 +16,8 @@ dependencies {
     implementation(project(":alchemist-maps"))
     implementation(project(":alchemist-smartcam"))
     implementation(project(":alchemist-cognitive-agents"))
+    implementation(project(":alchemist-physical-agents"))
+    implementation(project(":alchemist-incarnation-protelis"))
     implementation(Libs.miglayout_swing)
     implementation(Libs.mapsforge_map_awt) {
         exclude(group = "com.github.blackears", module = "svgSalamander")
@@ -69,4 +71,10 @@ publishing.publications {
             }
         }
     }
+}
+
+tasks.register<JavaExec>("runAlchemist") {
+    classpath = project.sourceSets.getByName("main").runtimeClasspath
+    main = "it.unibo.alchemist.Alchemist"
+    args = listOf("-y", "simulations/goal-oriented-explore.yml")
 }
